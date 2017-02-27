@@ -5,9 +5,10 @@
  * @constructor
  */
 
+import SignalBinding from './SignalBinding';
+
 export default class Signal {
 
-  static VERSION = 1.0;
 
   constructor(...args) {
 
@@ -56,7 +57,25 @@ export default class Signal {
    */
   _registerListener(listener, isOnce, listenerContext, priority) {
 
+    let
+    prevIndex = this._indexOfListener(listener, listenerContext),
+    binding;
 
+    if (prevIndex !== -1) {
+        binding = this._bindings[prevIndex];
+        if (binding.isOnce() !== isOnce) {
+            throw new Error('You cannot add'+ (isOnce? '' : 'Once') +'() then add'+ (!isOnce? '' : 'Once') +'() the same listener without removing the relationship first.');
+        }
+    } else {
+        binding = new SignalBinding(this, listener, isOnce, listenerContext, priority);
+        this._addBinding(binding);
+    }
+
+    if(this.memorize && this._prevParams){
+        binding.execute(this._prevParams);
+    }
+
+    return binding;
 
   }
 
@@ -95,7 +114,7 @@ export default class Signal {
    * @param {Number} [priority] The priority level of the event listener. Listeners with higher priority will be executed before listeners with lower priority. Listeners with same priority level will be executed at the same order as they were added. (default = 0)
    * @return {SignalBinding} An Object representing the binding between the Signal and listener.
    */
-  inject(listener, listenerContext, priority) {
+  add(listener, listenerContext, priority) {
       return this._registerListener(listener, false, listenerContext, priority);
   }
 
@@ -106,7 +125,7 @@ export default class Signal {
    * @param {Number} [priority] The priority level of the event listener. Listeners with higher priority will be executed before listeners with lower priority. Listeners with same priority level will be executed at the same order as they were added. (default = 0)
    * @return {SignalBinding} An Object representing the binding between the Signal and listener.
    */
-  injectOnce(listener, listenerContext, priority) {
+  addOnce(listener, listenerContext, priority) {
       return this._registerListener(listener, true, listenerContext, priority);
   }
 
