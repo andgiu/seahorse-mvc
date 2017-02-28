@@ -22,6 +22,7 @@
   "homepage": "https://github.com/andgiu/seahorse-mvc.git#readme",
   "dependencies": {
     "domready": "^1.0.8",
+    "fastdom": "^1.0.5",
     "lodash": "^4.17.4"
   },
   "devDependencies": {

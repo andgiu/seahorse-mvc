@@ -9,7 +9,6 @@ import SignalBinding from './SignalBinding';
 
 export default class Signal {
 
-
   constructor(...args) {
 
     /**
