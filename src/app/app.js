@@ -1,6 +1,7 @@
 import { RESIZE } from '../core/events/Events';
 import AppSignals from './signal/AppSignals';
 import AppRouter from './router/AppRouter';
+import SectionManager from './manager/SectionManager';
 
 export default class App {
 
@@ -18,6 +19,9 @@ export default class App {
      * Define global var $Router
      */
     window.$Router = new AppRouter();
+
+
+    this._sectionManager = new SectionManager();
 
   }
 
