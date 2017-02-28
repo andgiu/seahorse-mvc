@@ -4,7 +4,7 @@ const CONFIG = {
     root:           window.location.pathname,
     mainNode:       document.getElementById('app'),
     localhost:      document.location.hostname.indexOf('localhost') != -1,
-    contextMenu:    false,
+    contextMenu:    false
 }
 
 export default CONFIG;

@@ -115,13 +115,13 @@ export default class Router {
   check(f) {
 
     let fragment = f || this.getFragment();
-    
+
     _.each(this._routes, function(r) {
 
       let match = fragment.match(r.route);
+
       if(match) {
-        match.shift();
-        r.handler.apply({}, match);
+        r.handler(match.input.split('/'));
         return this;
       }
 
