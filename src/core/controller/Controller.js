@@ -18,7 +18,7 @@ export default class Controller {
 
   build() {
 
-    $Console.log("--")
+    $Console.log(`--- build section ${this._name} `);
 
   }
 
