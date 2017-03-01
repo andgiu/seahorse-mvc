@@ -5,12 +5,13 @@ export default class AppRouter {
 
   constructor() {
 
-    this._routes = [];
 
+    this._routes = [];
     this._active = false;
 
     this._route = new Router({mode: MODE_HISTORY});
     this._route.add(this.routerHandler.bind(this)).listen();
+    this._fragment = this._route.getFragment();
 
   }
 
@@ -24,16 +25,20 @@ export default class AppRouter {
   }
 
   routerHandler(...args) {
-
     if(!this.active) return false;
-    $Signal.urlHasChanged();
+    $Signal.urlHasChanged(args);
   }
 
   navigate(path) {
 
     if(!this.active) return this;
     this._route.navigate(path);
+    return this;
+  }
 
+  start() {
+    this.active = true;
+    this._route.check();
     return this;
   }
 

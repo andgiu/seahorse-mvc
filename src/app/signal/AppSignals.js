@@ -7,6 +7,7 @@ export default class AppSignals {
     this._initialize = new Signal();
     this._resize = new Signal();
     this._urlchanged = new Signal();
+    this._toggle = new Signal();
 
     this.initialize = this.initialize.bind(this);
     this.resize = this.resize.bind(this);
@@ -14,9 +15,12 @@ export default class AppSignals {
 
 
 
-  initialize() {
-    this._initialize.dispatch();
-    this._initialize.dispose();
+  initialize(...args) {
+    if(this._initialize) {
+      this._initialize.dispatch(args);
+      this._initialize.dispose();
+      this._initialize = null;
+    }
   }
 
   resize(e) {

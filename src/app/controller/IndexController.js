@@ -1,14 +1,16 @@
 import Controller from '../../core/controller/Controller';
-import IndexModel from '../model/IndexModel';
-import IndexView from '../view/IndexView';
+import Model from '../model/IndexModel';
+import View from '../view/IndexView';
 
 export default class IndexController extends Controller {
 
-  constructor(...args) {
-    super(args);
+  constructor() {
+    super(Model, View);
+  }
 
-    this._model = new IndexModel();
-    this._view = new IndexView();
+  initalized() {
+    super.initalized();
+    
   }
 
 
