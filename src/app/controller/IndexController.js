@@ -8,11 +8,4 @@ export default class IndexController extends Controller {
     super(Model, View);
   }
 
-  initalized() {
-    super.initalized();
-    
-  }
-
-
-
 }

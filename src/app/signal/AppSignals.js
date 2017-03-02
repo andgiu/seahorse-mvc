@@ -8,12 +8,12 @@ export default class AppSignals {
     this._resize = new Signal();
     this._urlchanged = new Signal();
     this._toggle = new Signal();
+    this._section = new Signal();
 
     this.initialize = this.initialize.bind(this);
     this.resize = this.resize.bind(this);
+
   }
-
-
 
   initialize(...args) {
     if(this._initialize) {

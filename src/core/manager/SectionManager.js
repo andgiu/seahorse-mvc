@@ -1,8 +1,10 @@
-import IndexController from '../controller/IndexController';
+import { SECTION_RENDERED, SECTION_READY, SECTION_DESTROYED } from '../events/SignalEvents';
 
 export default class SectionManager {
 
-  constructor(sections) {
+  constructor(sections, controllers) {
+
+    this.$root = document.getElementById('section-holder');
 
     this._current = null;
 
@@ -14,8 +16,8 @@ export default class SectionManager {
     /*
      * Defines all sections used in the site.
      */
-    this._controllers = [ new IndexController() ];
-
+    //this._controllers = [ new IndexController() ];
+    this._controllers = controllers;
 
     _.each(sections,(s, i) => { this.add(s, this._controllers[i]); });
 
@@ -24,7 +26,7 @@ export default class SectionManager {
      */
     $Signal._initialize.addOnce(this.onInit.bind(this));
     $Signal._urlchanged.add(this.onUrlChange.bind(this));
-
+    $Signal._section.add(this.onSectionUpdated.bind(this));
   }
 
   onInit(e) {
@@ -48,7 +50,28 @@ export default class SectionManager {
     section.controller.build();
   }
 
+  onSectionUpdated(type, args) {
 
+    switch(type) {
+
+      case SECTION_RENDERED:
+
+        let section = document.createElement('section');
+        section.setAttribute('id',args);
+        section.innerHTML = this.current.controller.content;
+        fastdom.mutate(() => { this.$root.appendChild(section); });
+
+      break;
+
+      case SECTION_READY:
+
+
+
+      break;
+
+    }
+
+  }
 
   add(s, controller) {
     this._sections.push({

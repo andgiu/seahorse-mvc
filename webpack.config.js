@@ -30,22 +30,31 @@ module.exports = {
     })
   ],
   module: {
-    loaders: [{
-      test: /\.jsx?$/,
-      exclude: /node_modules/,
-      loader: 'babel',
-      query: {
-        "presets": ["react", "es2015", "stage-0", "react-hmre"]
-      }
-    }, {
+    loaders: [
+      {
+        test: /\.html$/,
+        loader: "html-loader"
+      },
+      {
+        test: /\.jsx?$/,
+        exclude: /node_modules/,
+        loader: 'babel',
+        query: {
+          "presets": ["react", "es2015", "stage-0", "react-hmre"]
+        }
+      },
+      {
         test: /\.jpe?g$|\.gif$|\.png$/i,
         loader: 'file'
-    },{
-      test: /\.json?$/,
-      loader: 'json'
-    },{
-      test: /\.scss$/,
-      loaders: ["style", "css?sourceMap", "sass?sourceMap"]
-    }]
+      },
+      {
+        test: /\.json?$/,
+        loader: 'json'
+      },
+      {
+        test: /\.scss$/,
+        loaders: ["style", "css?sourceMap", "sass?sourceMap"]
+      }
+    ]
   }
 };
