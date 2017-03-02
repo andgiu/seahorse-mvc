@@ -37,7 +37,7 @@ export default class IndexView extends View {
   }
 
   transitionOut() {
-    TweenMax.to(this._el,.85,{force3D:true, x:'100%', ease:Expo.easeInOut});
+    TweenMax.to(this._el,.85,{force3D:true, x:'100%', ease:Expo.easeInOut,onComplete:() => {this.remove();}});
   }
 
 }

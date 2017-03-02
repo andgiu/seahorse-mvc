@@ -46,7 +46,7 @@ export default class View {
 
     this._el.innerHTML = '';
     this._el.parentNode.removeChild(this._el);
-    
+
     this._el = null;
     this._html = null;
     this._template = null;
