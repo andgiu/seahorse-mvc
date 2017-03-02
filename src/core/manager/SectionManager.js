@@ -48,11 +48,9 @@ export default class SectionManager {
 
     if(section) {
 
-      if(this.current) {
-
+      if(this.current)
         this.current.controller.remove();
 
-      }
 
       if(!section.controller.isActive()) {
 
@@ -96,7 +94,7 @@ export default class SectionManager {
 
       case SECTION_READY:
 
-          $Signal._toggle.dispatch(true);
+        $Signal._toggle.dispatch(true);
 
       break;
 
