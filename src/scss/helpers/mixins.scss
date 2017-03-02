@@ -1,0 +1,57 @@
+@mixin MediaQuery($media:$MEDIA_Tablet) {
+
+    @if $media == $MEDIA_Tablet {
+      @media only screen and (min-width: $MEDIA_Tablet_Width) { @content; }
+    } @else if $media == $MEDIA_DesktopBase {
+      @media only screen and (min-width: $MEDIA_DesktopBase_Width)  { @content; }
+    } @else if $media == $MEDIA_DesktopWide {
+      @media only screen and (min-width: $MEDIA_DesktopWide_Width)  { @content; }
+    } @else if $media == $MEDIA_Smartphone {
+      @media only screen and (max-width: $MEDIA_Smartphone_Width)  { @content; }
+    }
+}
+
+@mixin prefix($property, $value, $prefixes: ()) {
+  @each $prefix in $prefixes {
+    -#{$prefix}-#{$property}: $value;
+  }
+  #{$property}: $value;
+}
+
+@mixin keyframes($animation-name) {
+
+    @-webkit-keyframes #{$animation-name} { @content; }
+    @keyframes #{$animation-name} { @content; }
+}
+
+@mixin animation($name,$duration:.5s,$delay:0s,$fillmode:forwards,$ease:$EASE_BEZIER_Out) {
+
+    @include prefix(animation-name,$name,'webkit');
+    @include prefix(animation-duration,$duration,'webkit');
+    @include prefix(animation-fill-mode,$fillmode,'webkit');
+    @include prefix(animation-timing-function,$ease,'webkit');
+    @include prefix(animation-delay,$delay,'webkit');
+
+}
+
+@mixin transition($time: .25s, $delay:0s, $timing-function: $EASE_BEZIER_Out) {
+    @include prefix(transition, all $time $timing-function $delay, 'webkit');
+}
+
+@mixin centerY {
+
+  top: 50%;
+  @include prefix(transform, translateY(-50%), 'webkit moz');
+
+}
+
+@mixin centerX {
+
+  left: 50%;
+  @include prefix(transform, translateX(-50%), 'webkit moz');
+
+}
+
+@mixin translateX($x:0) {
+  @include prefix(transform, translateX($x), 'webkit moz');
+}

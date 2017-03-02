@@ -2,12 +2,15 @@ export default class View {
 
   constructor(...args) {
 
+    this._el = null;
     this._html = null;
     this._template = null;
 
   }
 
-  build() {
+  build(name) {
+    this._el = document.createElement('section');
+    this._el.setAttribute('id',name);
     this.built();
   }
 
@@ -29,6 +32,25 @@ export default class View {
 
   ready() {
     this.controller.ready();
+  }
+
+  transitionOut() {
+    this.dispose();
+  }
+
+  remove() {
+    this.controller.dispose();
+  }
+
+  dispose() {
+
+    this._el.innerHTML = '';
+    this._el.parentNode.removeChild(this._el);
+    
+    this._el = null;
+    this._html = null;
+    this._template = null;
+
   }
 
 

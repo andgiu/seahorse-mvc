@@ -1,0 +1,26 @@
+$FONT_Lit:      'ProximaLight';
+$FONT_Reg:      'ProximaRegular';
+$FONT_Bold:      'ProximaBold';
+
+$COLOR_GoldLight:   #c3a572;
+$COLOR_Gold:        #a27830;
+$COLOR_Black:       #000;
+$COLOR_White:       #fff;
+$COLOR_LIGHTGRAY:   #f4f4f4;
+$COLOR_LIGHTGRAY2:  #f0f0f0;
+
+$MEDIA_Smartphone:          'smartphone';
+$MEDIA_Tablet:              'tablet';
+$MEDIA_DesktopBase:         'desktop-small';
+$MEDIA_DesktopWide:         'desktop-wide';
+
+$MEDIA_Smartphone_Width:    767px;
+$MEDIA_Tablet_Width:        768px;
+$MEDIA_DesktopBase_Width:   992px;
+$MEDIA_DesktopWide_Width:   1080px;
+
+$DEFAULT_DESKTOP_PADDING:   80px;
+
+$EASE_Ease:                 ease;
+$EASE_BEZIER_Out:           cubic-bezier(.19,.5,.46,.88);
+$EASE_BEZIER_InOut:         cubic-bezier(.77,0,.175,1);

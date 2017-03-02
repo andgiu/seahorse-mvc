@@ -12,6 +12,7 @@ export default class AppSignals {
 
     this.initialize = this.initialize.bind(this);
     this.resize = this.resize.bind(this);
+    
 
   }
 

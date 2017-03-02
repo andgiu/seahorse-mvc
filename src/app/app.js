@@ -1,3 +1,4 @@
+import Helpers from '../core/helpers/JSHelpers';
 import Console from '../core/helpers/Console';
 import { RESIZE } from '../core/events/Events';
 import SectionManager from '../core/manager/SectionManager';
@@ -10,7 +11,9 @@ import AppRouter from './router/AppRouter';
  * Section Controllers
  */
 import IndexController from './controller/IndexController';
+import AboutController from './controller/AboutController';
 
+import '../scss/style.scss';
 
 export default class App {
 
@@ -24,7 +27,6 @@ export default class App {
      */
     window.$Signal = new AppSignals();
     window.addEventListener(RESIZE,_.debounce(() => { $Signal.resize }, 150));
-
 
     /**
      * Initialize the Routing and default handlers
@@ -40,7 +42,7 @@ export default class App {
     this._sectionManager = new SectionManager(
 
       config.sections,
-      [new IndexController()]
+      [new IndexController(), new AboutController()]
 
     );
 

@@ -1,10 +1,11 @@
-import { SECTION_RENDERED, SECTION_READY, SECTION_DESTROYED } from '../events/SignalEvents';
+import { SECTION_BUILD, SECTION_RENDERED, SECTION_READY, SECTION_DESTROYED } from '../events/SignalEvents';
 
 export default class SectionManager {
 
   constructor(sections, controllers) {
 
     this.$root = document.getElementById('section-holder');
+
 
     this._current = null;
 
@@ -44,28 +45,58 @@ export default class SectionManager {
     let route = String(fragment[0]).toLowerCase();
     let section = _.find(this._sections,(s) => { return s.route == route; });
 
-    [section.model,section.view] = section.controller.create(section.name, section.params);
-    this.current = section;
 
-    section.controller.build();
+    if(section) {
+
+      if(this.current) {
+
+        this.current.controller.remove();
+
+      }
+
+      if(!section.controller.isActive()) {
+
+        [section.model,section.view] = section.controller.create(section.name, section.params);
+
+        this.current = section;
+        section.controller.build();
+
+      } else {
+
+        this.current = section;
+        this.current.controller.rendered();
+
+      }
+
+
+    } else {
+
+      $Console.warning('----- Router address not defined ----- ');
+
+    }
+
+
   }
 
   onSectionUpdated(type, args) {
 
     switch(type) {
 
+      case SECTION_BUILD:
+
+        $Signal._toggle.dispatch(false);
+
+      break;
+
       case SECTION_RENDERED:
 
-        let section = document.createElement('section');
-        section.setAttribute('id',args);
-        section.innerHTML = this.current.controller.content;
-        fastdom.mutate(() => { this.$root.appendChild(section); });
+        fastdom.mutate(() => { this.$root.appendChild(this.current.controller.content); });
 
       break;
 
       case SECTION_READY:
 
-
+          $Signal._toggle.dispatch(true);
 
       break;
 

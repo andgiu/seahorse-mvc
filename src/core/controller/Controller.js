@@ -1,11 +1,10 @@
-import { SECTION_RENDERED, SECTION_READY, SECTION_DESTROYED } from '../events/SignalEvents';
+import { SECTION_BUILD, SECTION_RENDERED, SECTION_READY, SECTION_DESTROYED } from '../events/SignalEvents';
 
 export default class Controller {
 
   constructor(Model, View) {
 
     this._built = false;
-    this._active = false;
     this._drawn = false;
     this._ready = false;
 
@@ -30,7 +29,8 @@ export default class Controller {
 
   build() {
     $Console.log(`----- build section ${this._name} `);
-    this._view.build();
+    this._view.build(this._name);
+    $Signal._section.dispatch(SECTION_BUILD);
   }
 
   built() {
@@ -51,10 +51,17 @@ export default class Controller {
     $Signal._section.dispatch(SECTION_READY);
   }
 
+  remove() {
+    this._view.transitionOut();
+  }
+
+  isActive() {
+    return this._ready;
+  }
+
   dispose() {
 
     this._built = false;
-    this._active = false;
     this._drawn = false;
     this._ready = false;
 
@@ -67,7 +74,7 @@ export default class Controller {
   }
 
   get content() {
-    return this._view._html;
+    return this._view._el;
   }
 
 }

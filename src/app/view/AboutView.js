@@ -4,7 +4,7 @@ import { TweenMax, Expo } from 'gsap';
 
 let button;
 
-export default class IndexView extends View {
+export default class AboutView extends View {
 
   constructor(...args) {
     super(args);
@@ -18,26 +18,22 @@ export default class IndexView extends View {
     button = this._el.querySelector('button');
     button.addEventListener('click',this.onClickHandler.bind(this));
 
-    TweenMax.set(this._el,{x:'100%'});
+    TweenMax.set(this._el,{x:'-100%'});
     this.rendered();
   }
 
   onClickHandler() {
-
-    $Router.navigate('about');
-
+    $Router.navigate('');
   }
 
   transitionIn() {
-
-
     TweenMax.to(this._el,.85,{force3D:true, x:'0%', ease:Expo.easeInOut});
     this.ready();
-
   }
 
   transitionOut() {
-    TweenMax.to(this._el,.85,{force3D:true, x:'100%', ease:Expo.easeInOut});
+    TweenMax.to(this._el,.85,{force3D:true, x:'-100%', ease:Expo.easeInOut});
+    this.remove();
   }
 
 }
