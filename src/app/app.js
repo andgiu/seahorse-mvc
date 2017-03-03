@@ -1,11 +1,16 @@
 import Helpers from '../core/helpers/JSHelpers';
 import Console from '../core/helpers/Console';
 import { RESIZE } from '../core/events/Events';
-import SectionManager from '../core/manager/SectionManager';
+import AppSectionManager from './manager/AppSectionManager';
 import config from './config/Config';
+
+// Initialize Signals
 import AppSignals from './signal/AppSignals';
+
+// Initialize Router
 import AppRouter from './router/AppRouter';
 
+import AppHTTPService from './services/AppHTTPService';
 
 /**
  * Section Controllers
@@ -19,27 +24,29 @@ export default class App {
 
   constructor() {
 
+    /**
+     *  Set language
+     */
+    window.lang = config.lang;
+
+    /**
+     * Initialize the Console helper class
+     */
     window.$Console = new Console(config.debug);
 
     /**
      * Initialize the Signals and default handlers
      * Define global var $Signal
      */
-    window.$Signal = new AppSignals();
-    window.addEventListener(RESIZE,_.debounce(() => { $Signal.resize }, 150));
+    window.addEventListener(RESIZE,_.debounce(() => { AppSignals.resize }, 150));
 
-    /**
-     * Initialize the Routing and default handlers
-     * Define global var $Router
-     */
-    window.$Router = new AppRouter();
 
     /**
      * Initialize the SectionManager
      * @param {Array} sections
      * @param {Array} Controller
      */
-    this._sectionManager = new SectionManager(
+    this._sectionManager = new AppSectionManager(
 
       config.sections,
       [new IndexController(), new AboutController()]
@@ -53,8 +60,8 @@ export default class App {
 
   initialize() {
 
-    $Console.log('** Seahorser MVCS **');
-    $Signal.initialize();
+    $Console.intro(' *** Seahorser MVCS *** ');
+    AppSignals.initialize();
 
   }
 

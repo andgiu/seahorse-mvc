@@ -1,3 +1,4 @@
+import AppRouter from '../router/AppRouter';
 import View from '../../core/view/View';
 import Template from './templates/default.html';
 import { TweenMax, Expo } from 'gsap';
@@ -23,7 +24,7 @@ export default class AboutView extends View {
   }
 
   onClickHandler() {
-    $Router.navigate('');
+    AppRouter.navigate('');
   }
 
   transitionIn() {

@@ -1,3 +1,4 @@
+const COLOR_INTRO = '#ff324f';
 const COLOR_WARNING = '#e65700';
 
 export default class Console {
@@ -11,6 +12,11 @@ export default class Console {
     if(!this._debug) return 0;
     console.log.apply(this,args);
 
+  }
+
+  intro(...args) {
+    let warningMessage = [`%c ${args}`];
+    console.log(`%c ${args[0]}`, `background: #111; color: ${COLOR_INTRO}; padding:0px`);
   }
 
   warning(...args) {

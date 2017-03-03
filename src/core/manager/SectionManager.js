@@ -1,3 +1,4 @@
+import AppSignals from '../../app/signal/AppSignals';
 import { SECTION_BUILD, SECTION_RENDERED, SECTION_READY, SECTION_DESTROYED } from '../events/SignalEvents';
 
 export default class SectionManager {
@@ -19,15 +20,9 @@ export default class SectionManager {
      */
     //this._controllers = [ new IndexController() ];
     this._controllers = controllers;
-
     _.each(sections,(s, i) => { this.add(s, this._controllers[i]); });
 
-    /*
-     * Initialize Signals
-     */
-    $Signal._initialize.addOnce(this.onInit.bind(this));
-    $Signal._urlchanged.add(this.onUrlChange.bind(this));
-    $Signal._section.add(this.onSectionUpdated.bind(this));
+
   }
 
   onInit(e) {
@@ -36,7 +31,6 @@ export default class SectionManager {
      * Once the site is initalized
      * we call the Router start method
      */
-    $Router.start();
 
   }
 
@@ -82,7 +76,7 @@ export default class SectionManager {
 
       case SECTION_BUILD:
 
-        $Signal._toggle.dispatch(false);
+        AppSignals._toggle.dispatch(false);
 
       break;
 
@@ -94,7 +88,7 @@ export default class SectionManager {
 
       case SECTION_READY:
 
-        $Signal._toggle.dispatch(true);
+        AppSignals._toggle.dispatch(true);
 
       break;
 

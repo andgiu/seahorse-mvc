@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/andgiu/seahorse-mvc.git#readme",
   "dependencies": {
+    "axios": "^0.15.3",
     "domready": "^1.0.8",
     "fastdom": "^1.0.5",
     "gsap": "^1.19.1",

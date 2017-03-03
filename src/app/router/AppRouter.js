@@ -1,7 +1,9 @@
+import AppSignals from '../signal/AppSignals';
 import { MODE_HISTORY } from '../../core/router/RouterType';
 import Router from '../../core/router/Router';
 
-export default class AppRouter {
+
+class AppRouter {
 
   constructor() {
 
@@ -26,7 +28,7 @@ export default class AppRouter {
 
   routerHandler(...args) {
     if(!this.active) return false;
-    $Signal.urlHasChanged(args);
+    AppSignals.urlHasChanged(args);
   }
 
   navigate(path) {
@@ -51,3 +53,5 @@ export default class AppRouter {
   }
 
 }
+
+export default (new AppRouter);

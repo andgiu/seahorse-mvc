@@ -1,3 +1,4 @@
+import AppSignals from '../../app/signal/AppSignals';
 import { SECTION_BUILD, SECTION_RENDERED, SECTION_READY, SECTION_DESTROYED } from '../events/SignalEvents';
 
 export default class Controller {
@@ -30,7 +31,7 @@ export default class Controller {
   build() {
     $Console.log(`----- build section ${this._name} `);
     this._view.build(this._name);
-    $Signal._section.dispatch(SECTION_BUILD);
+    AppSignals._section.dispatch(SECTION_BUILD);
   }
 
   built() {
@@ -43,12 +44,12 @@ export default class Controller {
     $Console.log(`--- transitionIn section ${this._name} `);
     this._drawn = true;
     this._view.transitionIn();
-    $Signal._section.dispatch(SECTION_RENDERED, this._name);
+    AppSignals._section.dispatch(SECTION_RENDERED, this._name);
   }
 
   ready() {
     this._ready = true;
-    $Signal._section.dispatch(SECTION_READY);
+    AppSignals._section.dispatch(SECTION_READY);
   }
 
   remove() {

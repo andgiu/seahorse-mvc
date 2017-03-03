@@ -1,3 +1,4 @@
+import AppRouter from '../router/AppRouter';
 import View from '../../core/view/View';
 import Template from './templates/default.html';
 import { TweenMax, Expo } from 'gsap';
@@ -24,12 +25,11 @@ export default class IndexView extends View {
 
   onClickHandler() {
 
-    $Router.navigate('about');
+    AppRouter.navigate('about');
 
   }
 
   transitionIn() {
-
 
     TweenMax.to(this._el,.85,{force3D:true, x:'0%', ease:Expo.easeInOut});
     this.ready();

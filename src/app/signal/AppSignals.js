@@ -1,6 +1,6 @@
 import Signal from '../../core/signal/Signal';
 
-export default class AppSignals {
+class AppSignals {
 
   constructor(){
 
@@ -12,7 +12,7 @@ export default class AppSignals {
 
     this.initialize = this.initialize.bind(this);
     this.resize = this.resize.bind(this);
-    
+
 
   }
 
@@ -36,3 +36,5 @@ export default class AppSignals {
   }
 
 }
+
+export default (new AppSignals);
