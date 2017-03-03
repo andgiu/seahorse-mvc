@@ -52,11 +52,12 @@ export default class HTTPService {
   success(response) {
 
     this._busy = false;
-
+    console.log(response);
+    
   }
 
-  error(e) {
-
+  error(err) {
+    throw(err);
   }
 
 }

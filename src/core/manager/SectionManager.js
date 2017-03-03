@@ -1,4 +1,3 @@
-import AppSignals from '../../app/signal/AppSignals';
 import { SECTION_BUILD, SECTION_RENDERED, SECTION_READY, SECTION_DESTROYED } from '../events/SignalEvents';
 
 export default class SectionManager {
@@ -76,7 +75,7 @@ export default class SectionManager {
 
       case SECTION_BUILD:
 
-        AppSignals._toggle.dispatch(false);
+        this._signal._toggle.dispatch(false);
 
       break;
 
@@ -88,7 +87,7 @@ export default class SectionManager {
 
       case SECTION_READY:
 
-        AppSignals._toggle.dispatch(true);
+        this._signal._toggle.dispatch(true);
 
       break;
 

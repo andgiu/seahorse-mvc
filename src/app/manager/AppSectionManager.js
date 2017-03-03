@@ -12,9 +12,10 @@ export default class AppSectionManager extends SectionManager {
     /*
      * Initialize Signals
      */
-    AppSignals._initialize.addOnce(this.onInit.bind(this));
-    AppSignals._urlchanged.add(this.onUrlChange.bind(this));
-    AppSignals._section.add(this.onSectionUpdated.bind(this));
+    this._signal = AppSignals;
+    this._signal._initialize.addOnce(this.onInit.bind(this));
+    this._signal._urlchanged.add(this.onUrlChange.bind(this));
+    this._signal._section.add(this.onSectionUpdated.bind(this));
 
   }
 

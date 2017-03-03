@@ -1,8 +1,10 @@
 import Helpers from '../core/helpers/JSHelpers';
 import Console from '../core/helpers/Console';
 import { RESIZE } from '../core/events/Events';
-import AppSectionManager from './manager/AppSectionManager';
 import config from './config/Config';
+
+// Initialize SectionManager
+import AppSectionManager from './manager/AppSectionManager';
 
 // Initialize Signals
 import AppSignals from './signal/AppSignals';
@@ -10,11 +12,10 @@ import AppSignals from './signal/AppSignals';
 // Initialize Router
 import AppRouter from './router/AppRouter';
 
+// Initialize HTTPService
 import AppHTTPService from './services/AppHTTPService';
 
-/**
- * Section Controllers
- */
+// Section Controllers
 import IndexController from './controller/IndexController';
 import AboutController from './controller/AboutController';
 
@@ -60,8 +61,8 @@ export default class App {
 
   initialize() {
 
-    $Console.intro(' *** Seahorser MVCS *** ');
-    AppSignals.initialize();
+    $Console.intro(' *** Seahorse MVCS *** ');
+    AppHTTPService.getInitXML(window.lang);
 
   }
 
