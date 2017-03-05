@@ -12,11 +12,11 @@ class AppHTTPService {
 
   }
 
-  getInitXML(lang) {
+  getInitXML(lang, callback) {
 
     this._ajax.getXML(BASE_PATH + `sog_${lang}.xml`, null, (result) => {
       window.$Locale = this._xmltojson.parse(result.data, true).xml;
-
+      callback();
     });
 
   }

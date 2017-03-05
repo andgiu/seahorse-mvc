@@ -55,7 +55,7 @@ export default class SectionManager {
       } else {
 
         this.current = section;
-        this.current.controller.rendered();
+        this.current.controller.rendered(true);
 
       }
 
@@ -81,7 +81,10 @@ export default class SectionManager {
 
       case SECTION_RENDERED:
 
-        fastdom.mutate(() => { this.$root.appendChild(this.current.controller.content); });
+        let added = args;
+
+        if(!added)
+          fastdom.mutate(() => { this.$root.appendChild(this.current.controller.content); });
 
       break;
 

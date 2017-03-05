@@ -62,7 +62,9 @@ export default class App {
   initialize() {
 
     $Console.intro(' *** Seahorse MVCS *** ');
-    AppHTTPService.getInitXML(window.lang);
+    AppHTTPService.getInitXML(window.lang,() => {
+      AppSignals.initialize();
+    });
 
   }
 

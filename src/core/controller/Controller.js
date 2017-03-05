@@ -40,11 +40,11 @@ export default class Controller {
     this._view.render();
   }
 
-  rendered() {
+  rendered(added) {
     $Console.log(`--- transitionIn section ${this._name} `);
     this._drawn = true;
     this._view.transitionIn();
-    this._signal._section.dispatch(SECTION_RENDERED, this._name);
+    this._signal._section.dispatch(SECTION_RENDERED, added);
   }
 
   ready() {

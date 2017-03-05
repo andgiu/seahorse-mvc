@@ -33,7 +33,7 @@ export default class AboutView extends View {
   }
 
   transitionOut() {
-    TweenMax.to(this._el,.85,{force3D:true, x:'-100%', ease:Expo.easeInOut,onComplete:() => {this.remove();} });
+    TweenMax.to(this._el,1.25,{force3D:true, x:'-100%', ease:Expo.easeInOut,onComplete:() => {this.remove();} });
   }
 
 }
