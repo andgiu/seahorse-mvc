@@ -22,7 +22,10 @@ module.exports = {
       inject: 'body',
       filename: 'index.html'
     }),
-    new CopyWebpackPlugin([{from:'src/xml', to:'xml'}]),
+    new CopyWebpackPlugin([
+      {from:'src/xml', to:'xml'},
+      {from:'src/_assets', to:'assets'},
+    ]),
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),

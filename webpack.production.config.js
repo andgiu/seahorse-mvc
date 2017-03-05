@@ -1,10 +1,11 @@
-1'use strict';
+'use strict';
 
 var path = require('path');
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
-
+var CopyWebpackPlugin = require('copy-webpack-plugin');
+var WebpackCleanupPlugin = require('webpack-cleanup-plugin');
 
 module.exports = {
   entry: [
@@ -22,6 +23,7 @@ module.exports = {
       inject: 'body',
       filename: 'index.html'
     }),
+    new CopyWebpackPlugin([{from:'src/xml', to:'xml'}]),
     new ExtractTextPlugin('[name]-[hash].min.css'),
     new webpack.optimize.UglifyJsPlugin({
       minimize: true,
@@ -36,17 +38,23 @@ module.exports = {
     new webpack.DefinePlugin({
       //'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
       'process.env.NODE_ENV': JSON.stringify('production')
-    })
+    }),
+    new WebpackCleanupPlugin()
   ],
   module: {
-    loaders: [{
+    loaders: [
+      {
+        test: /\.html$/,
+        loader: "html-loader"
+      },
+      {
       test: /\.jsx?$/,
       exclude: /node_modules/,
       loader: 'babel',
       query: {
         "presets": ["es2015", "stage-0", "react"]
       }
-    }, {
+      }, {
       test: /\.json?$/,
       loader: 'json'
     }, {
