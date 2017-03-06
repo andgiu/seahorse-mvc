@@ -4,6 +4,7 @@ export default class SectionManager {
 
   constructor(sections, controllers) {
 
+    this.$app = document.getElementById('app');
     this.$root = document.getElementById('section-holder');
 
 
@@ -37,7 +38,6 @@ export default class SectionManager {
 
     let route = String(fragment[0]).toLowerCase();
     let section = _.find(this._sections,(s) => { return s.route == route; });
-
 
     if(section) {
 
@@ -91,6 +91,12 @@ export default class SectionManager {
       case SECTION_READY:
 
         this._signal._toggle.dispatch(true);
+
+      break;
+
+      case SECTION_DESTROYED:
+
+        this._signal.
 
       break;
 

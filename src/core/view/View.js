@@ -53,5 +53,18 @@ export default class View {
 
   }
 
+  htmlToElement(html) {
+    let template = document.createElement('template');
+    template.innerHTML = html;
+
+    let node = template.content.firstChild;
+    template = null;
+    return node;
+  }
+
+  get $el() {
+    return this._el;
+  }
+
 
 }

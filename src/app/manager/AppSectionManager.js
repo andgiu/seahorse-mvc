@@ -1,8 +1,10 @@
 import SectionManager from '../../core/manager/SectionManager';
 import AppSignals from '../signal/AppSignals';
 import AppRouter from '../router/AppRouter';
-import IndexController from '../controller/IndexController';
 
+import HeaderController from '../controller/_HeaderController';
+
+let $headerModel, $headerView;
 
 export default class AppSectionManager extends SectionManager {
 
@@ -17,11 +19,21 @@ export default class AppSectionManager extends SectionManager {
     this._signal._urlchanged.add(this.onUrlChange.bind(this));
     this._signal._section.add(this.onSectionUpdated.bind(this));
 
+    this.addHeader();
   }
 
   onInit(e) {
-
     AppRouter.start();
+  }
+
+  addHeader() {
+
+    let _headerController = new HeaderController();
+    [$headerModel, $headerView] = _headerController.create('nav',{});
+    $headerView.render();
+
+    this.$app.appendChild($headerView.$el);
+    
   }
 
 

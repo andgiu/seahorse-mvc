@@ -4,6 +4,8 @@ export default class Controller {
 
   constructor(Model, View, Signal) {
 
+    this._static = false;
+
     this._built = false;
     this._drawn = false;
     this._ready = false;
@@ -29,18 +31,24 @@ export default class Controller {
   }
 
   build() {
+    if(this._static) return 0;
+
     $Console.log(`----- build section ${this._name} `);
     this._view.build(this._name);
     this._signal._section.dispatch(SECTION_BUILD);
   }
 
   built() {
+    if(this._static) return 0;
+
     $Console.log(`---- render section ${this._name} `);
     this._built = true;
     this._view.render();
   }
 
   rendered(added) {
+    if(this._static) return 0;
+
     $Console.log(`--- transitionIn section ${this._name} `);
     this._drawn = true;
     this._view.transitionIn();
@@ -48,6 +56,8 @@ export default class Controller {
   }
 
   ready() {
+    if(this._static) return 0;
+    
     this._ready = true;
     this._signal._section.dispatch(SECTION_READY);
   }
@@ -61,6 +71,8 @@ export default class Controller {
   }
 
   dispose() {
+
+    this._signal._section.dispatch(SECTION_DESTROYED, this._name);
 
     this._built = false;
     this._drawn = false;

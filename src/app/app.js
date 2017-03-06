@@ -48,10 +48,8 @@ export default class App {
      * @param {Array} Controller
      */
     this._sectionManager = new AppSectionManager(
-
       config.sections,
       [new IndexController(), new AboutController()]
-
     );
 
 
