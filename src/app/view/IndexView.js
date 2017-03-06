@@ -1,18 +1,17 @@
 import AppRouter from '../router/AppRouter';
 import View from '../../core/view/View';
 import Template from './templates/default.html';
-//import { TweenMax, Expo } from 'gsap';
+import { TweenMax, Expo } from 'gsap';
+import IScroll from 'iscroll';
 
 
-let button;
+let button, iscroll;
 
 export default class IndexView extends View {
 
   constructor(...args) {
     super(args);
     this._template = this._template = _.template(Template);
-
-
   }
 
   render() {
@@ -22,12 +21,15 @@ export default class IndexView extends View {
     button = this._el.querySelector('button');
     button.addEventListener('click',this.onClickHandler.bind(this));
 
-    //TweenMax.set(this._el,{x:'100%'});
+    TweenMax.set(this._el,{x:'100%'});
+
+    iscroll = new IScroll(this._el, {
+      mouseWheel: true,
+      scrollbars: true,
+      disableMouse: false,
+    });
+
     this.rendered();
-  }
-
-  onReady() {
-
   }
 
   onClickHandler() {
@@ -38,15 +40,18 @@ export default class IndexView extends View {
 
   transitionIn() {
 
-    //this._video.play();
-    //TweenMax.to(this._el,.85,{force3D:true, x:'0%', ease:Expo.easeInOut});
+    setTimeout(function(){
+      iscroll.refresh();
+    },10);
+
+
+    TweenMax.to(this._el,.85,{force3D:true, x:'0%', ease:Expo.easeInOut});
     this.ready();
 
   }
 
   transitionOut() {
-    this.remove();
-    //TweenMax.to(this._el,1.25,{force3D:true, x:'100%', ease:Expo.easeInOut,onComplete:() => {this.remove();}});
+    TweenMax.to(this._el,1.25,{force3D:true, x:'100%', ease:Expo.easeInOut,onComplete:() => {this.remove();}});
   }
 
 }

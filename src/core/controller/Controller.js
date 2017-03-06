@@ -57,7 +57,7 @@ export default class Controller {
 
   ready() {
     if(this._static) return 0;
-    
+
     this._ready = true;
     this._signal._section.dispatch(SECTION_READY);
   }

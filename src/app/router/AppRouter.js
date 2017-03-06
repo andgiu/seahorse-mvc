@@ -29,8 +29,8 @@ class AppRouter {
   }
 
   routerHandler(...args) {
-    if(!this.active) return false;
 
+    if(!this.active) return false;
     this._routes.push(String(args[0]).toLowerCase());
     AppSignals.urlHasChanged(args);
   }

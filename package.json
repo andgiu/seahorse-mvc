@@ -25,6 +25,7 @@
     "domready": "^1.0.8",
     "fastdom": "^1.0.5",
     "gsap": "^1.19.1",
+    "iscroll": "^5.2.0",
     "lodash": "^4.17.4",
     "simple-xml2json": "^1.2.3"
   },

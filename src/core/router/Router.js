@@ -41,6 +41,7 @@ export default class Router {
 
     let fragment = '';
 
+
     if(this._mode === MODE_HISTORY) {
 
       fragment = this.clearSlashes(decodeURI(location.pathname + location.search));
@@ -114,13 +115,14 @@ export default class Router {
    */
   check(f) {
 
-    let fragment = f || this.getFragment();
+    let fragment = f != undefined ? f : this.getFragment();
 
     _.each(this._routes, function(r) {
 
       let match = fragment.match(r.route);
 
       if(match) {
+
         r.handler(match.input.split('/'));
         return this;
       }

@@ -33,7 +33,7 @@ export default class AppSectionManager extends SectionManager {
     $headerView.render();
 
     this.$app.appendChild($headerView.$el);
-    
+
   }
 
 

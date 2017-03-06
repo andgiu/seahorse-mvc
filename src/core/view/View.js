@@ -11,6 +11,7 @@ export default class View {
   build(name) {
     this._el = document.createElement('section');
     this._el.setAttribute('id',name);
+    //$addClass(this._el,'disabled');
     this.built();
   }
 
@@ -31,6 +32,7 @@ export default class View {
   }
 
   ready() {
+    //$removeClass(this._el,'disabled');
     this.controller.ready();
   }
 
