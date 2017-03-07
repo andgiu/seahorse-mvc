@@ -17,7 +17,10 @@ module.exports = {
     publicPath: '/'
   },
   plugins: [
-    new webpack.optimize.OccurenceOrderPlugin(),
+    new webpack.DefinePlugin({
+      //'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
+      'process.env.NODE_ENV': JSON.stringify('production')
+    }),
     new HtmlWebpackPlugin({
       template: 'src/index.html',
       inject: 'body',
@@ -25,6 +28,8 @@ module.exports = {
     }),
     new CopyWebpackPlugin([{from:'src/xml', to:'xml'}]),
     new ExtractTextPlugin('[name]-[hash].min.css'),
+    new webpack.optimize.OccurenceOrderPlugin(),
+    new webpack.optimize.DedupePlugin(),
     new webpack.optimize.UglifyJsPlugin({
       minimize: true,
       output: {
@@ -35,10 +40,7 @@ module.exports = {
         screw_ie8: true
       }
     }),
-    new webpack.DefinePlugin({
-      //'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
-      'process.env.NODE_ENV': JSON.stringify('production')
-    }),
+    new webpack.optimize.AggressiveMergingPlugin(),
     new WebpackCleanupPlugin()
   ],
   module: {
