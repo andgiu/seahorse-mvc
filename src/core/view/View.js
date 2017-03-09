@@ -1,3 +1,6 @@
+const DISABLED_CLASS = 's-disabled';
+
+
 export default class View {
 
   constructor(...args) {
@@ -11,7 +14,7 @@ export default class View {
   build(name) {
     this._el = document.createElement('section');
     this._el.setAttribute('id',name);
-    //$addClass(this._el,'disabled');
+    $addClass(this._el,DISABLED_CLASS);
     this.built();
   }
 
@@ -32,7 +35,7 @@ export default class View {
   }
 
   ready() {
-    //$removeClass(this._el,'disabled');
+    $removeClass(this._el,DISABLED_CLASS);
     this.controller.ready();
   }
 
@@ -42,6 +45,10 @@ export default class View {
 
   remove() {
     this.controller.dispose();
+  }
+
+  disable() {
+    $addClass(this._el,DISABLED_CLASS);
   }
 
   dispose() {

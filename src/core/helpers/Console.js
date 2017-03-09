@@ -1,5 +1,6 @@
 const COLOR_INTRO = '#ff324f';
 const COLOR_WARNING = '#e65700';
+const COLOR_SECTION = ['#fe045c','#eb7c33','#9dd72e'];
 
 export default class Console {
 
@@ -12,14 +13,17 @@ export default class Console {
     console.log.apply(this,args);
   }
 
+  section(level, message) {
+    this.log(message);
+    //this.log(`%c ${message}`, `color: ${COLOR_SECTION[level]}; padding:0px`);
+  }
+
   intro(...args) {
-    let warningMessage = [`%c ${args}`];
-    this.log(`%c ${args[0]}`, `background: #111; color: ${COLOR_INTRO}; padding:0px`);
+    this.log(`%c ${args[0]}`, `font-size:14px; color: ${COLOR_INTRO}; padding:0px`);
   }
 
   warning(...args) {
-    let warningMessage = [`%c ${args}`];
-    this.log(`%c ${args[0]}`, `background: #111; color: ${COLOR_WARNING}`);
+    this.log(`%c ${args[0]}`, `color: ${COLOR_WARNING}`);
   }
 
 }

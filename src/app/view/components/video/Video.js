@@ -26,6 +26,8 @@ export default class Video {
     if(!options.el) this.initialize(this._video, options);
     else this.addListeners(this._video);
 
+    this.callback = options.callback || this.onDefaultCallback.bind(this);
+    
     this.onLoadStart = this.onLoadStart.bind(this);
     this.onLoadedMetadata = this.onLoadedMetadata.bind(this);
     this.onProgress = this.onProgress.bind(this);
@@ -51,6 +53,7 @@ export default class Video {
     v.addEventListener(LOADSTART,           this.onLoadStart, false);
     v.addEventListener(LOADEDMETADATA,      this.onLoadedMetadata, false);
     v.addEventListener(PROGRESS,            this.onProgress, false);
+    v.load();
   }
 
   onLoadStart(e) {
@@ -71,7 +74,7 @@ export default class Video {
     this._progressID = setInterval(() => {
 
       if(this.progress > this.buffer) {
-        this._ready();
+        this.onReady();
         clearInterval(this._progressID);
       }
 
@@ -84,7 +87,8 @@ export default class Video {
   }
 
   onReady() {
-    //
+    this._ready = true;
+    this.callback('ready');
   }
 
   play() {
@@ -100,7 +104,12 @@ export default class Video {
     this._video.removeEventListener(CANPLAY, this.onCanPlay);
 
     this._video.setAttribute('src','');
+    this._video.parentNode.remove(this._video);
     this._video = null;
+  }
+
+  onDefaultCallback() {
+
   }
 
   get buffer() {
