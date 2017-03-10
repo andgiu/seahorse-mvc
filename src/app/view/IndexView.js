@@ -7,6 +7,9 @@ import IScroll from 'iscroll';
 
 let button, iscroll;
 
+
+
+
 export default class IndexView extends View {
 
   constructor(...args) {
@@ -34,7 +37,8 @@ export default class IndexView extends View {
 
   onClickHandler() {
 
-    AppRouter.navigate('about');
+    this.controller.FBlogin();
+    //AppRouter.navigate('about');
 
   }
 
@@ -56,7 +60,7 @@ export default class IndexView extends View {
       iscroll.destroy();
       button = null;
       iscroll = null;
-      
+
       this.remove();
 
     }});
