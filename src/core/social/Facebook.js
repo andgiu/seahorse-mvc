@@ -40,16 +40,24 @@ export default class Facebook {
   }
 
   getFBStatus() {
-    FB.getLoginStatus(this.onStatusChangeHandler);
+    FB.getLoginStatus();
   }
 
   onStatusChangeHandler(response) {
+
     this._status = response.status;
 
-    if(this.connected) {
+    if(this._status == FB_STATUS_NOT_AUTHORIZED) {
+
+      this._signal._social.dispatch('fb','error',FB_STATUS_NOT_AUTHORIZED);
+
+    } else if(this._status == FB_STATUS_CONNECTED) {
+
       this._user = response.authResponse;
       this.getUserInfo();
+      
     }
+
   }
 
   login() {
@@ -59,7 +67,7 @@ export default class Facebook {
   }
 
   onApiHandler(response) {
-  
+
     this._user = {
       id: response.id,
       name: response.name,

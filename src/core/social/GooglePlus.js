@@ -1,3 +1,6 @@
+const ERROR_ACCESS_DENIED = 'access_denied';
+const ERROR_POPUP_CLOSED = 'popup_closed_by_user';
+
 export default class GooglePlus {
 
   constructor(_appId, _AppSignal = null, _scope = 'profile', _cookie_policy = 'single_host_origin') {
@@ -26,21 +29,27 @@ export default class GooglePlus {
         scope: _scope,
         cookiepolicy: _cookie_policy
 
-      }).then(() => {
+      })
+      .then(() => {
 
         this._initialized = true;
         this._auth2 = gapi.auth2.getAuthInstance();
         this._auth2.isSignedIn.listen(this.onSignInChangedHandler.bind(this));
-        this._auth2.currentUser.listen(this.onUserChangedHandler.bind(this));
+        //this._auth2.currentUser.listen(this.onUserChangedHandler.bind(this));
 
-      })
+      },(e) => {
+
+        throw(e);
+
+      });
+
 
     });
 
   }
 
   onSignInChangedHandler(...args) {
-
+    //
   }
 
   onUserChangedHandler(response) {
@@ -70,8 +79,11 @@ export default class GooglePlus {
       return this;
     }
 
-    this._auth2.signIn();
+    this._auth2.signIn().then(this.onUserChangedHandler.bind(this),this.onErrorHandler.bind(this));
+  }
 
+  onErrorHandler(e) {
+    this._signal._social.dispatch('gp','error',e.error);
   }
 
   get user() {

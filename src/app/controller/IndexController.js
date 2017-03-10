@@ -17,8 +17,8 @@ export default class IndexController extends Controller {
   }
 
   FBlogin() {
-    //this._fb.login();
-    this._gp.login();
+    this._fb.login();
+    //this._gp.login();
   }
 
   onSocialApi(social, type, args) {
