@@ -61,7 +61,9 @@ export default class GooglePlus {
         name: profile.getName(),
         firstname: profile.getGivenName(),
         lastname: profile.getFamilyName(),
-        email: profile.getEmail()
+        email: profile.getEmail(),
+        type: 'google-plus',
+        profileUrl: ''
       }
 
       if(this._signal && this._signal._social) {

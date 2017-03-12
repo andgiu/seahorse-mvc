@@ -22,12 +22,18 @@ export default class HTTPService {
 
   }
 
-  getXML(url, params, success, error) {
+  get(url, params, success, error) {
 
     this._method = GET;
-
     this._responseType = TYPE_TEXT;
+    this.call(url, params, success || this.success, error || this.error)
 
+  }
+
+  post(url, params, success, error) {
+
+    this._method = POST;
+    this._responseType = TYPE_TEXT;
     this.call(url, params, success || this.success, error || this.error)
 
   }
@@ -38,6 +44,7 @@ export default class HTTPService {
 
     return axios({
 
+      crossDomain: true,
       url: url,
       method: this._method,
       data: params,
@@ -53,7 +60,7 @@ export default class HTTPService {
 
     this._busy = false;
     console.log(response);
-    
+
   }
 
   error(err) {

@@ -10,6 +10,7 @@ class AppSignals {
     this._toggle = new Signal();
     this._section = new Signal();
     this._social = new Signal();
+    this._http = new Signal();
 
     this.initialize = this.initialize.bind(this);
     this.resize = this.resize.bind(this);

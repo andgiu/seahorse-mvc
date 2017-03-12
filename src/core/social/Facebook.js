@@ -33,7 +33,7 @@ export default class Facebook {
 
     this.onStatusChangeHandler = this.onStatusChangeHandler.bind(this)
     this.getUserInfo = this.getUserInfo.bind(this);
-    this.onApiHandler = this.onApiHandler.bind(this);
+    this.onGetProfileHandler = this.onGetProfileHandler.bind(this);
 
     this.getFBStatus();
 
@@ -55,7 +55,7 @@ export default class Facebook {
 
       this._user = response.authResponse;
       this.getUserInfo();
-      
+
     }
 
   }
@@ -66,14 +66,16 @@ export default class Facebook {
     }
   }
 
-  onApiHandler(response) {
+  onGetProfileHandler(response) {
 
     this._user = {
       id: response.id,
       name: response.name,
       email: response.email,
       firstname: response.first_name,
-      lastname: response.last_name
+      lastname: response.last_name,
+      type: 'facebook',
+      profileUrl: ''
     };
 
     if(this._signal && this._signal._social) {
@@ -82,7 +84,7 @@ export default class Facebook {
   }
 
   getUserInfo() {
-    FB.api(FB_API_ME,{fields:'name, first_name, last_name, email'},this.onApiHandler);
+    FB.api(FB_API_ME,{fields:'name, first_name, last_name, email'},this.onGetProfileHandler);
   }
 
   get user() {
