@@ -5,7 +5,7 @@ const COLOR_SECTION = ['#fe045c','#eb7c33','#9dd72e'];
 export default class Console {
 
   constructor(debug) {
-    this._debug = $isMobile() ? false : debug;
+    this._debug = __isMobile() ? false : debug;
   }
 
   log(...args) {

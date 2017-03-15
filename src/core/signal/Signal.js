@@ -213,6 +213,8 @@ export default class Signal {
       this.removeAll();
       delete this._bindings;
       delete this._prevParams;
+      this._bindings = null;
+      this._prevParams = null;
   }
 
   /**

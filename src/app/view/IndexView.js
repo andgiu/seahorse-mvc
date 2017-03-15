@@ -9,7 +9,6 @@ let button, iscroll;
 
 
 
-
 export default class IndexView extends View {
 
   constructor(...args) {
@@ -37,8 +36,8 @@ export default class IndexView extends View {
 
   onClickHandler() {
 
-    this.controller.FBlogin();
-    //AppRouter.navigate('about');
+    //this.controller.FBlogin();
+    AppRouter.navigate('about');
 
   }
 

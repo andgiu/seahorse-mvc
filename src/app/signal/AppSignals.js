@@ -1,29 +1,17 @@
 import Signal from '../../core/signal/Signal';
+import CoreSignal from '../../core/signal/CoreSignal';
 
-class AppSignals {
+class AppSignals extends CoreSignal {
 
   constructor(){
+    super();
 
-    this._initialize = new Signal();
-    this._resize = new Signal();
-    this._urlchanged = new Signal();
-    this._toggle = new Signal();
-    this._section = new Signal();
     this._social = new Signal();
     this._http = new Signal();
 
     this.initialize = this.initialize.bind(this);
     this.resize = this.resize.bind(this);
 
-
-  }
-
-  initialize(...args) {
-    if(this._initialize) {
-      this._initialize.dispatch(args);
-      this._initialize.dispose();
-      this._initialize = null;
-    }
   }
 
   resize(e) {
@@ -34,7 +22,7 @@ class AppSignals {
   }
 
   urlHasChanged(fragment) {
-    this._urlchanged.dispatch(fragment);
+    this._routing.dispatch(fragment);
   }
 
 }

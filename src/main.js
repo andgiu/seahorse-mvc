@@ -5,17 +5,14 @@
  * @web:        http://www.buzzbrothers.ch
 **/
 
-
 import domready from 'domready';
 import _ from 'lodash';
 import fastdom from 'fastdom';
-
 import App from './app/App';
 
 
 domready(() => {
 
   let application = new App();
-
 
 })

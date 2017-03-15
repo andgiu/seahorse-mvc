@@ -1,4 +1,4 @@
-import { SECTION_BUILD, SECTION_RENDERED, SECTION_READY, SECTION_DESTROYED } from '../events/SignalEvents';
+import * as SectionEvent from '../events/SignalEvents';
 
 export default class SectionManager {
 
@@ -14,6 +14,8 @@ export default class SectionManager {
      * Section array containers
      */
     this._sections = new Array();
+
+
 
     /*
      * Defines all sections used in the site.
@@ -38,6 +40,7 @@ export default class SectionManager {
 
     let route = String(fragment[0]).toLowerCase();
     let section = _.find(this._sections,(s) => { return s.route == route; });
+    $Console.log(`route: ${route}`,section);
 
     if(section) {
 
@@ -73,13 +76,13 @@ export default class SectionManager {
 
     switch(type) {
 
-      case SECTION_BUILD:
+      case SectionEvent.SECTION_BUILD:
 
         this._signal._toggle.dispatch(false);
 
       break;
 
-      case SECTION_RENDERED:
+      case SectionEvent.SECTION_RENDERED:
 
         let added = args;
 
@@ -88,15 +91,15 @@ export default class SectionManager {
 
       break;
 
-      case SECTION_READY:
+      case SectionEvent.SECTION_READY:
 
         this._signal._toggle.dispatch(true);
 
       break;
 
-      case SECTION_DESTROYED:
+      case SectionEvent.SECTION_DESTROYED:
 
-        this._signal.
+
 
       break;
 
