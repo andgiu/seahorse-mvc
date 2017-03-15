@@ -23,7 +23,7 @@ export default class IndexView extends View {
     button = this._el.querySelector('button');
     button.addEventListener('click',this.onClickHandler.bind(this));
 
-    TweenMax.set(this._el,{x:'100%'});
+    TweenMax.set(this._el,{x:'-100%'});
 
     iscroll = new IScroll(this._el, {
       mouseWheel: true,

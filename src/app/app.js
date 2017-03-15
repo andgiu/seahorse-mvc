@@ -18,6 +18,7 @@ import AppHTTPService from './services/AppHTTPService';
 // Section Controllers
 import IndexController from './controller/IndexController';
 import AboutController from './controller/AboutController';
+import ThirdController from './controller/ThirdController';
 
 import '../scss/style.scss';
 
@@ -51,15 +52,19 @@ export default class App {
      */
     this._sectionManager = new AppSectionManager(
       config.sections,
-      [new IndexController(), new AboutController()]
+      [
+        new IndexController(),
+        new AboutController(),
+        new ThirdController()
+      ]
     );
 
 
-    this.initialize();
+    this.startApplication();
 
   }
 
-  initialize() {
+  startApplication() {
 
     $Console.intro(' *** Seahorse MVCS *** ');
     AppHTTPService.getInitXML(window.lang,() => {

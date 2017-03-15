@@ -5,7 +5,7 @@ import { TweenMax, Expo } from 'gsap';
 
 let button;
 
-export default class AboutView extends View {
+export default class ThirdView extends View {
 
   constructor(...args) {
     super(args);
@@ -24,7 +24,7 @@ export default class AboutView extends View {
   }
 
   onClickHandler() {
-    AppRouter.navigate('third');
+    AppRouter.navigate('');
   }
 
   transitionIn() {

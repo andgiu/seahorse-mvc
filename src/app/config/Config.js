@@ -16,6 +16,11 @@ const CONFIG = {
                         route: 'about',
                         params: {},
                         name: 'about'
+                      },
+                      {
+                        route: 'third',
+                        params: {},
+                        name: 'third'
                       }
                     ]
 }
