@@ -16,7 +16,7 @@ export default class ThirdView extends View {
     this._html = this._template();
     this._el.innerHTML = this._html;
 
-    button = this._el.querySelector('button');
+    button = this._el.querySelector('sh-button');
     button.addEventListener('click',this.onClickHandler.bind(this));
 
     TweenMax.set(this._el,{x:'-100%'});

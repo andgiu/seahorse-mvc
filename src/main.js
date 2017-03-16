@@ -5,11 +5,13 @@
  * @web:        http://www.buzzbrothers.ch
 **/
 
+import 'document-register-element'
 import domready from 'domready';
 import _ from 'lodash';
 import fastdom from 'fastdom';
 import App from './app/App';
 
+import Video from './core/view/components/Button';
 
 domready(() => {
 

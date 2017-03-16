@@ -61,8 +61,9 @@ section {
 	transform: translateZ(0);
   }
 
-  button {
+  sh-button {
     position: absolute;
+    background-color: #fff;
     width: 50px;
     height: 50px;
     left: 50%;
