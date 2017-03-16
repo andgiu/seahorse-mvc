@@ -5,16 +5,29 @@
  * @web:        http://www.buzzbrothers.ch
 **/
 
-import 'document-register-element'
+// Core Classes
 import domready from 'domready';
-import _ from 'lodash';
-import fastdom from 'fastdom';
+import 'document-register-element'
+import 'velocity-animate';
+import 'lodash';
+import 'fastdom';
+
+
+// Main Classes
+import Helpers from './core/helpers/JSHelpers';
+import Console from './core/helpers/Console';
 import App from './app/App';
 
-import Video from './core/view/components/Button';
+// Custom Components
+import './core/view/components/Button';
 
 domready(() => {
 
+  /**
+   * Initialize the Console helper class
+   */
+  window.__Console = new Console();
   let application = new App();
+
 
 })

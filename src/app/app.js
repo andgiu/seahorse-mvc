@@ -1,6 +1,4 @@
-import Helpers from '../core/helpers/JSHelpers';
-import Console from '../core/helpers/Console';
-import { RESIZE } from '../core/events/Events';
+import * as Event from '../core/events/Events';
 import config from './config/Config';
 
 // Initialize SectionManager
@@ -23,7 +21,6 @@ import ThirdController from './controller/ThirdController';
 import '../scss/style.scss';
 
 
-
 export default class App {
 
   constructor() {
@@ -33,16 +30,12 @@ export default class App {
      */
     window.lang = config.lang;
 
-    /**
-     * Initialize the Console helper class
-     */
-    window.$Console = new Console(config.debug);
 
     /**
      * Initialize the Signals and default handlers
      * Define global var $Signal
      */
-    window.addEventListener(RESIZE,_.debounce(() => { AppSignals.resize }, 150));
+    window.addEventListener(Event.RESIZE,_.debounce(AppSignals.resize, 150));
 
 
     /**
@@ -66,7 +59,7 @@ export default class App {
 
   startApplication() {
 
-    $Console.intro(' *** Seahorse MVCS *** ');
+    __Console.intro(' *** Seahorse MVCS *** ');
     AppHTTPService.getInitXML(window.lang,() => {
       AppSignals.initialize();
     });

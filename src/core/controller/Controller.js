@@ -88,7 +88,7 @@ export default class Controller {
   build() {
     if(this._static) return 0;
 
-    $Console.section(0,`••• build section ${this._name} `);
+    __Console.section(0,`••• build section ${this._name} `);
     this._view.build(this._name);
     this._signal._section.dispatch(SECTION_BUILD);
 
@@ -103,7 +103,7 @@ export default class Controller {
   built() {
     if(this._static) return 0;
 
-    $Console.section(1,`••• render section ${this._name} `);
+    __Console.section(1,`••• render section ${this._name} `);
     this._built = true;
     this._view.render();
 
@@ -118,7 +118,7 @@ export default class Controller {
   rendered(added) {
     if(this._static) return 0;
 
-    $Console.section(2,`••• transitionIn section ${this._name} `);
+    __Console.section(2,`••• transitionIn section ${this._name} `);
     this._drawn = true;
     this._view.transitionIn();
     this._signal._section.dispatch(SECTION_RENDERED, added);

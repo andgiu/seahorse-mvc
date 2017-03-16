@@ -1,9 +1,9 @@
 import AppRouter from '../router/AppRouter';
 import View from '../../core/view/View';
 import Template from './templates/default.html';
-import { TweenMax, Expo } from 'gsap';
 import IScroll from 'iscroll';
 
+import Preloader from '../../core/manager/Preloader';
 
 let button, iscroll;
 
@@ -14,6 +14,13 @@ export default class IndexView extends View {
   constructor(...args) {
     super(args);
     this._template = this._template = _.template(Template);
+
+    this._queue = new Preloader({
+      manifest:['./assets/img/test01.jpg','./assets/img/test02.jpg','./assets/img/test03.jpg',]
+    });
+
+    this._queue.load();
+
   }
 
   render() {
@@ -23,7 +30,7 @@ export default class IndexView extends View {
     button = this._el.querySelector('sh-button');
     button.addEventListener('click',this.onClickHandler.bind(this));
 
-    TweenMax.set(this._el,{x:'-100%'});
+
 
     iscroll = new IScroll(this._el, {
       mouseWheel: true,
@@ -44,26 +51,12 @@ export default class IndexView extends View {
 
   transitionIn() {
 
-    setTimeout(function(){
-      iscroll.refresh();
-    },10);
-
-
-    TweenMax.to(this._el,.85,{force3D:true, x:'0%', ease:Expo.easeInOut});
     this.ready();
-
   }
 
   transitionOut() {
-    TweenMax.to(this._el,1.25,{force3D:true, x:'100%', ease:Expo.easeInOut,onComplete:() => {
-
-      iscroll.destroy();
-      button = null;
-      iscroll = null;
-
-      this.remove();
-
-    }});
+    this.remove();
   }
+
 
 }

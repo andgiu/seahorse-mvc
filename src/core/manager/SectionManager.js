@@ -40,7 +40,7 @@ export default class SectionManager {
 
     let route = String(fragment[0]).toLowerCase();
     let section = _.find(this._sections,(s) => { return s.route == route; });
-    $Console.log(`route: ${route}`,section);
+    __Console.log(`route: ${route}`,section);
 
     if(section) {
 
@@ -65,7 +65,7 @@ export default class SectionManager {
 
     } else {
 
-      $Console.warning('----- Router address not defined ----- ');
+      __Console.warning('----- Router address not defined ----- ');
 
     }
 

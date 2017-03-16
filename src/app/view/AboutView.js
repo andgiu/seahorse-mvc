@@ -1,7 +1,7 @@
 import AppRouter from '../router/AppRouter';
 import View from '../../core/view/View';
 import Template from './templates/default.html';
-import { TweenMax, Expo } from 'gsap';
+
 
 let button;
 
@@ -19,7 +19,6 @@ export default class AboutView extends View {
     button = this._el.querySelector('sh-button');
     button.addEventListener('click',this.onClickHandler.bind(this));
 
-    TweenMax.set(this._el,{x:'-100%'});
     this.rendered();
   }
 
@@ -28,12 +27,12 @@ export default class AboutView extends View {
   }
 
   transitionIn() {
-    TweenMax.to(this._el,.85,{force3D:true, x:'0%', ease:Expo.easeInOut});
+
     this.ready();
   }
 
   transitionOut() {
-    TweenMax.to(this._el,1.25,{force3D:true, x:'100%', ease:Expo.easeInOut,onComplete:() => {this.remove();} });
+    this.remove();
   }
 
 }

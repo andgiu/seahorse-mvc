@@ -10,12 +10,12 @@ export default class Facebook {
 
 
     if(!FB) {
-      $Console.warning('Facebook instance is not defined.');
+      __Console.warning('Facebook instance is not defined.');
       return this;
     }
 
     if(!_appId) {
-      $Console.warning('You must define an application ID in order to continue.');
+      __Console.warning('You must define an application ID in order to continue.');
       return this;
     }
 

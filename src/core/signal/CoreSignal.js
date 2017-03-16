@@ -8,6 +8,7 @@ export default class ApplicationSignal {
     this._resize = new Signal();
     this._routing = new Signal();
     this._section = new Signal();
+    
 
   }
 

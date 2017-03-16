@@ -6,12 +6,12 @@ export default class GooglePlus {
   constructor(_appId, _AppSignal = null, _scope = 'profile', _cookie_policy = 'single_host_origin') {
 
     if(!gapi) {
-      $Console.warning('GooglePlus instance is not defined.');
+      __Console.warning('GooglePlus instance is not defined.');
       return this;
     }
 
     if(!_appId) {
-      $Console.warning('You must define an application ID in order to continue.');
+      __Console.warning('You must define an application ID in order to continue.');
       return this;
     }
 
@@ -77,7 +77,7 @@ export default class GooglePlus {
   login() {
 
     if(!this.initialized) {
-      $Console.warning('GooglePlus not initialized.');
+      __Console.warning('GooglePlus not initialized.');
       return this;
     }
 
