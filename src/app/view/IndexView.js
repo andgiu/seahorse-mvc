@@ -19,7 +19,9 @@ export default class IndexView extends View {
       manifest:['./assets/img/test01.jpg','./assets/img/test02.jpg','./assets/img/test03.jpg',]
     });
 
-    this._queue.load();
+    this._queue.load().then((result) => {
+      console.log(result)
+    })
 
   }
 

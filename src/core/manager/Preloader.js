@@ -14,10 +14,7 @@ export default class Preloader {
 
     this._queue = new createjs.LoadQueue(true, basePath);
     this._queue.setMaxConnections(config.maxConnections || 10);
-
-    this._queue.on(LOADING_COMPLETE, this.onCompleteHandler.bind(this));
     this._queue.on(LOADING_PROGRESS, this.onProgressHandler.bind(this));
-    this._queue.on(LOADING_ERROR, this.onErrorHandler.bind(this));
 
   }
 
@@ -28,31 +25,45 @@ export default class Preloader {
   }
 
   load() {
-    this._queue.loadManifest(this.manifest);
+
+    let dispose = this.dispose.bind(this);
+    this._promise = new Promise((resolve, reject) => {
+
+      function onCompleteHandler(e) {
+
+        resolve(this._loadedResults);
+        dispose();
+
+      }
+
+      function onErrorHandler(e) {
+
+        reject(e);
+        dispose();
+      }
+
+      this._queue.on(LOADING_COMPLETE, onCompleteHandler);
+      this._queue.on(LOADING_ERROR, onErrorHandler);
+      this._queue.loadManifest(this.manifest);
+
+    });
+
+    return this._promise;
+
   }
 
   dispose() {
     if(this._queue) {
+      delete this._promise;
+      this._promise = null;
       this._queue.removeAllEventListeners();
       this._queue.close();
       this._queue = null;
     }
   }
 
-  onCompleteHandler(e) {
-    this._result = e.target._loadedResults;
-    this.dispose();
-
-    if(this.complete) this.complete(this.result);
-  }
-
   onProgressHandler(e) {
-    if(this.progress) this.progress(e.loaded);
-  }
-
-  onErrorHandler(error) {
-    throw(error);
-    if(this.error) this.error(error);
+    if(this._config.progress) this._config.progress(e.loaded);
   }
 
   set manifest(manifestArray) {
