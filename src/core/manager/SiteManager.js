@@ -69,7 +69,6 @@ export default class SectionManager {
 
     }
 
-
   }
 
   onSectionUpdated(type, args) {
@@ -104,6 +103,14 @@ export default class SectionManager {
       break;
 
     }
+
+  }
+
+  create(controller, name = _.uniqueId('instance'), params = {}) {
+
+    let _controller = new controller();
+    let [_model, _view] = _controller.create(name, params);
+    return _view;
 
   }
 

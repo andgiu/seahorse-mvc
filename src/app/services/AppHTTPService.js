@@ -38,20 +38,20 @@ class AppHTTPService {
 
     this._user = user;
     this._call = POST_LOGIN;
-    this._ajax.post(POST_LOGIN, user, this.apiSuccess, this.apiError);
+    return this._ajax.post(POST_LOGIN, user, this.apiSuccess, this.apiError);
+
 
   }
 
   postStory(formData) {
 
     this._call = POST_SAVE_STORY;
-    this._ajax.post(POST_SAVE_STORY, formData, this.apiSuccess, this.apiError);
+    return this._ajax.post(POST_SAVE_STORY, formData, this.apiSuccess, this.apiError);
 
   }
 
   apiSuccess(result) {
 
-    console.log(result);
     let json = JSON.parse(result);
 
     switch(this._call) {

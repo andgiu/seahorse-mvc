@@ -2,7 +2,7 @@ import * as Event from '../core/events/Events';
 import config from './config/Config';
 
 // Initialize SectionManager
-import AppSectionManager from './manager/AppSectionManager';
+import AppSiteManager from './manager/AppSiteManager';
 
 // Initialize Signals
 import AppSignals from './signal/AppSignals';
@@ -43,7 +43,7 @@ export default class App {
      * @param {Array} sections
      * @param {Array} Controller
      */
-    this._sectionManager = new AppSectionManager(
+    this._sectionManager = new AppSiteManager(
       config.sections,
       [
         new IndexController(),

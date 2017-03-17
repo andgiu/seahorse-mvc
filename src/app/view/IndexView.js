@@ -3,7 +3,7 @@ import View from '../../core/view/View';
 import Template from './templates/default.html';
 import IScroll from 'iscroll';
 
-import Preloader from '../../core/manager/Preloader';
+import Preloader from '../../core/helpers/Preloader';
 
 let button, iscroll;
 
