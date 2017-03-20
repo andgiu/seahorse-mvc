@@ -25,6 +25,7 @@ export default class IndexView extends View {
 
   }
 
+
   render() {
     this._html = this._template();
     this._el.innerHTML = this._html;

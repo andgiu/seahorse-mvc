@@ -45,7 +45,7 @@ class Button extends HTMLElement {
 
       case ATTR_DISABLED:
 
-        (newValue == 'true' ? __addClass : __removeClass)(this,ATTR_DISABLED);
+        this[newValue == 'true' ? 'addClass' : 'removeClass'](ATTR_DISABLED);
 
       break;
 

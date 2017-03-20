@@ -19,9 +19,16 @@ import Console from './core/helpers/Console';
 import App from './app/App';
 
 // Custom Components
-import './core/view/components/Button';
+import './core/view/components/SHButton';
+
+import WebFontLoader from './core/helpers/WebFontLoader';
 
 domready(() => {
+
+  /**
+   * Set temmplate delimiters to {{ var }}
+   */
+  _.templateSettings.interpolate = /{{([\s\S]+?)}}/g;
 
   /**
    * Initialize the Console helper class

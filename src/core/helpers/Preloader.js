@@ -1,9 +1,7 @@
-const LOADING_COMPLETE = 'complete';
-const LOADING_PROGRESS = 'progress';
-const LOADING_ERROR = 'error';
-const TYPE_MANIFEST = 'manifest';
-
 import createjs from 'preload-js';
+import * as LoadingEvent from '../events/LoadingEvents';
+
+const TYPE_MANIFEST = 'manifest';
 
 export default class Preloader {
 
@@ -14,7 +12,7 @@ export default class Preloader {
 
     this._queue = new createjs.LoadQueue(true, basePath);
     this._queue.setMaxConnections(config.maxConnections || 10);
-    this._queue.on(LOADING_PROGRESS, this.onProgressHandler.bind(this));
+    this._queue.on(LoadingEvent.LOADING_PROGRESS, this.onProgressHandler.bind(this));
 
   }
 
@@ -25,6 +23,11 @@ export default class Preloader {
   }
 
   load() {
+
+    if(!this.manifest.length) {
+      __Console.warning('The manifest is empty.');
+      return false;
+    }
 
     let dispose = this.dispose.bind(this);
     this._promise = new Promise((resolve, reject) => {
@@ -42,8 +45,8 @@ export default class Preloader {
         dispose();
       }
 
-      this._queue.on(LOADING_COMPLETE, onCompleteHandler);
-      this._queue.on(LOADING_ERROR, onErrorHandler);
+      this._queue.on(LoadingEvent.LOADING_COMPLETE, onCompleteHandler);
+      this._queue.on(LoadingEvent.LOADING_ERROR, onErrorHandler);
       this._queue.loadManifest(this.manifest);
 
     });

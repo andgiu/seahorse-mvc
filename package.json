@@ -29,7 +29,8 @@
     "lodash": "^4.17.4",
     "preload-js": "^0.6.3",
     "simple-xml2json": "^1.2.3",
-    "velocity-animate": "^1.4.3"
+    "velocity-animate": "^1.4.3",
+    "webfontloader": "^1.6.27"
   },
   "devDependencies": {
     "babel-core": "^6.18.2",

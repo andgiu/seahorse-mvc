@@ -12,9 +12,10 @@ export default class View {
   }
 
   build(name) {
+
     this._el = document.createElement('section');
     this._el.setAttribute('id',name);
-    __addClass(this._el,DISABLED_CLASS);
+    this._el.addClass(DISABLED_CLASS);
     this.built();
   }
 
@@ -35,7 +36,7 @@ export default class View {
   }
 
   ready() {
-    __removeClass(this._el,DISABLED_CLASS);
+    this._el.removeClass(DISABLED_CLASS);
     this.controller.ready();
   }
 
@@ -47,8 +48,8 @@ export default class View {
     this.controller.dispose();
   }
 
-  disable() {
-    __addClass(this._el,DISABLED_CLASS);
+  disable() {;
+    this._el.addClass(DISABLED_CLASS);
   }
 
   dispose() {

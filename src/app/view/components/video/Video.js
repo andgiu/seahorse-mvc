@@ -27,7 +27,7 @@ export default class Video {
     else this.addListeners(this._video);
 
     this.callback = options.callback || this.onDefaultCallback.bind(this);
-    
+
     this.onLoadStart = this.onLoadStart.bind(this);
     this.onLoadedMetadata = this.onLoadedMetadata.bind(this);
     this.onProgress = this.onProgress.bind(this);
