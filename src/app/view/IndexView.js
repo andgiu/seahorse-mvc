@@ -1,6 +1,5 @@
 import AppRouter from '../router/AppRouter';
 import View from '../../core/view/View';
-import Template from './templates/default.html';
 import IScroll from 'iscroll';
 
 import Preloader from '../../core/helpers/Preloader';
@@ -11,44 +10,37 @@ let button, iscroll;
 
 export default class IndexView extends View {
 
-  constructor(...args) {
-    super(args);
-    this._template = this._template = _.template(Template);
+  constructor(controller) {
 
-    this._queue = new Preloader({
-      manifest:['./assets/img/test01.jpg','./assets/img/test02.jpg','./assets/img/test03.jpg',]
+    super(controller);
+
+    this.state = this.setState({
+      name: 'button'
     });
 
-    this._queue.load().then((result) => {
-      console.log(result)
-    })
-
+    console.log(this.state)
   }
 
 
   render() {
-    this._html = this._template();
-    this._el.innerHTML = this._html;
 
-    button = this._el.querySelector('sh-button');
-    button.addEventListener('click',this.onClickHandler.bind(this));
-
-
-
-    iscroll = new IScroll(this._el, {
-      mouseWheel: true,
-      scrollbars: true,
-      disableMouse: false,
-    });
-
+    this.$render`
+      <sh-button onclick="${this.onClickHandler.bind(this)}">${this.state.name}</sh-button>
+    `;
 
     this.rendered();
   }
 
+
+
   onClickHandler() {
 
+    this.state.name = "Ciao";
+    
+    //this.
+    //this._el.querySelector('sh-button').innerHTML = 'aaa';
     //this.controller.FBlogin();
-    AppRouter.navigate('about');
+    //AppRouter.navigate('about');
 
   }
 

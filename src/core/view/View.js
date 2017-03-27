@@ -1,13 +1,18 @@
 const DISABLED_CLASS = 's-disabled';
+import hyperHTML from 'hyperhtml';
 
 
 export default class View {
 
-  constructor(...args) {
+  constructor(controller) {
+
 
     this._el = null;
     this._html = null;
     this._template = null;
+    this._rendered = false;
+
+    this.controller = controller;
 
   }
 
@@ -16,6 +21,7 @@ export default class View {
     this._el = document.createElement('section');
     this._el.setAttribute('id',name);
     this._el.addClass(DISABLED_CLASS);
+    this.$render = hyperHTML.bind(this._el);
     this.built();
   }
 
@@ -28,7 +34,10 @@ export default class View {
   }
 
   rendered() {
-    this.controller.rendered();
+    if(!this._rendered) {
+      this._rendered = true;
+      this.controller.rendered();
+    }
   }
 
   transitionIn() {
@@ -63,6 +72,10 @@ export default class View {
 
   }
 
+  setState(stateOBJ) {
+    return this.controller.setState(stateOBJ);
+  }
+
   htmlToElement(html) {
     let template = document.createElement('template');
     template.innerHTML = html;
@@ -71,6 +84,7 @@ export default class View {
     template = null;
     return node;
   }
+
 
   get $el() {
     return this._el;

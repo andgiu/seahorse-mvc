@@ -7,7 +7,6 @@ export default class SectionManager {
     this.$app = document.getElementById('app');
     this.$root = document.getElementById('section-holder');
 
-
     this._current = null;
 
     /*
@@ -48,7 +47,7 @@ export default class SectionManager {
         this.current.controller.remove();
 
 
-      if(!section.controller.isActive()) {
+      if(!section.controller.active()) {
 
         [section.model,section.view] = section.controller.create(section.name, section.params);
 

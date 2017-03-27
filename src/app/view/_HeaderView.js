@@ -4,8 +4,8 @@ import Template from './templates/header.html';
 
 export default class HeaderView extends View {
 
-  constructor(...args) {
-    super(args);
+  constructor(controller) {
+    super(controller);
     this._template = this._template = _.template(Template);
   }
 

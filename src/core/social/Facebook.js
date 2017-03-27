@@ -1,7 +1,6 @@
 const FB_STATUS_CONNECTED = 'connected';
 const FB_STATUS_NOT_AUTHORIZED = 'not_authorized';
 const FB_STATUS_NOT_CONNECTED = 'not_connected';
-
 const FB_API_ME = '/me';
 
 export default class Facebook {

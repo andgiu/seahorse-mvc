@@ -71,11 +71,9 @@ export default class Controller {
 
     this._params = params;
 
-    this._model = new this._modelClass();
-    this._view = new this._viewClass();
-
-    this._view.controller = this;
-    this._model.controller = this;
+    this._model = new this._modelClass(this);
+    this._view = new this._viewClass(this);
+    this._view.model = this._model;
 
     return [this._model, this._view];
   }
@@ -156,8 +154,17 @@ export default class Controller {
    * @param {}
    * @return {Controller}
    */
-  isActive() {
+  active() {
     return this._ready;
+  }
+
+  /**
+   * Set the model state object
+   * @param {Object}
+   * @return {StateObject}
+   */
+  setState(stateOBJ) {
+    return this._model.setState(stateOBJ);
   }
 
   /**
