@@ -14,11 +14,12 @@ export default class Model {
 
   setState(stateOBJ) {
     this.state = stateOBJ;
-    const observer = Object.observe(this.state,this.onStateChangeHandler.bind(this));
+    let observer = Object.observe(this.state,this.onStateChangeHandler.bind(this));
     return observer;
   }
 
   onStateChangeHandler(change) {
+    console.log(change);
     this.controller._view.render();
   }
 
