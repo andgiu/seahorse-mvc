@@ -36,11 +36,11 @@ export default class IndexView extends View {
   onClickHandler() {
 
     this.state.name = "Ciao";
-    
+
     //this.
     //this._el.querySelector('sh-button').innerHTML = 'aaa';
     //this.controller.FBlogin();
-    //AppRouter.navigate('about');
+    AppRouter.navigate('about');
 
   }
 

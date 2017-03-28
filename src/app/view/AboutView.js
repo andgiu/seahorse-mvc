@@ -7,23 +7,38 @@ let button;
 
 export default class AboutView extends View {
 
-  constructor(...args) {
-    super(args);
-    this._template = this._template = _.template(Template);
+  constructor(controller) {
+
+    super(controller);
+
+    this.state = this.setState({
+      name: 'button'
+    });
+
+    console.log(this.state)
   }
 
-  render() {
-    this._html = this._template();
-    this._el.innerHTML = this._html;
 
-    button = this._el.querySelector('sh-button');
-    button.addEventListener('click',this.onClickHandler.bind(this));
+  render() {
+
+    this.$render`
+      <sh-button onclick="${this.onClickHandler.bind(this)}">${this.state.name}</sh-button>
+    `;
 
     this.rendered();
   }
 
+
+
   onClickHandler() {
-    AppRouter.navigate('third');
+
+    this.state.name = "Ciao";
+
+    //this.
+    //this._el.querySelector('sh-button').innerHTML = 'aaa';
+    //this.controller.FBlogin();
+    AppRouter.navigate('about');
+
   }
 
   transitionIn() {
@@ -34,5 +49,6 @@ export default class AboutView extends View {
   transitionOut() {
     this.remove();
   }
+
 
 }
